@@ -48,23 +48,24 @@ public class InterfaceUsuario {
         return taxa;
     }
 
-    // Novo método para adicionar múltiplos financiamentos
-    public List<Financiamento> adicionarFinanciamentos() {
-        List<Financiamento> financiamentos = new ArrayList<>();
-        String resposta;
+    public Financiamento criarNovoFinanciamento() {
+        double valorImovel = pedirValorImovel();
+        int prazoFinanciamento = pedirPrazoFinanciamento();
+        double taxaJuros = pedirTaxaJuros();
 
-        do {
-            double valorImovel = pedirValorImovel();
-            int prazoFinanciamento = pedirPrazoFinanciamento();
-            double taxaJuros = pedirTaxaJuros();
+        return new Financiamento(valorImovel, prazoFinanciamento, taxaJuros);
+    }
 
-            Financiamento financiamento = new Financiamento(valorImovel, prazoFinanciamento, taxaJuros);
-            financiamentos.add(financiamento);
+    public void exibirFinanciamentos(List<Financiamento> financiamentos) {
+        if (financiamentos.isEmpty()) {
+            System.out.println("Nenhum financiamento cadastrado.");
+            return;
+        }
 
-            System.out.print("Deseja adicionar outro financiamento? (s/n): ");
-            resposta = scanner.next().toLowerCase();
-        } while (resposta.equals("s"));
-
-        return financiamentos;
+        System.out.println("\nDetalhes dos Financiamentos Cadastrados:");
+        for (Financiamento financiamento : financiamentos) {
+            financiamento.exibirDetalhesFinanciamento();
+            System.out.println("------------------------------");
+        }
     }
 }
