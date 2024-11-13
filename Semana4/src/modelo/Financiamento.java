@@ -11,22 +11,10 @@ public class Financiamento {
         this.taxaJurosAnual = taxaJurosAnual;
     }
 
-    public double getValorImovel() {
-        return valorImovel;
-    }
-
-    public int getPrazoFinanciamento() {
-        return prazoFinanciamento;
-    }
-
-    public double getTaxaJurosAnual() {
-        return taxaJurosAnual;
-    }
-
     public double calcularPagamentoMensal() {
-        double prazoEmMeses = prazoFinanciamento * 12;
         double taxaMensal = taxaJurosAnual / 12 / 100;
-        return (valorImovel / prazoEmMeses) * (1 + taxaMensal);
+        int prazoMeses = prazoFinanciamento * 12;
+        return (valorImovel / prazoMeses) * (1 + taxaMensal);
     }
 
     public double calcularTotalPagamento() {
@@ -39,5 +27,18 @@ public class Financiamento {
         System.out.printf("Taxa de Juros Anual: %.2f%%%n", taxaJurosAnual);
         System.out.printf("Pagamento Mensal: R$ %.2f%n", calcularPagamentoMensal());
         System.out.printf("Total do Pagamento: R$ %.2f%n", calcularTotalPagamento());
+    }
+
+    // Getters para os atributos, caso seja necessário acesso futuro
+    public double getValorImovel() {
+        return valorImovel;
+    }
+
+    public int getPrazoFinanciamento() {
+        return prazoFinanciamento;
+    }
+
+    public double getTaxaJurosAnual() {
+        return taxaJurosAnual;
     }
 }
